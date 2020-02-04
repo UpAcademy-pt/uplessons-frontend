@@ -79,12 +79,12 @@
                                         <td>
                                             {{material.url}}
                                         </td>
-                                        <td   class="text-center">
+                                        <td class="text-center">
                                             <!-- <input class="form-check-input" type="checkbox" [value]="material.id"
                                                 (change)="onCheckboxChange($event)"> -->
-                                            <input type="checkbox" [value]="material.id"
-                                                id="materialCheck{{i}}" (change)="onCheckboxChange($event)">
-                                        </td >
+                                            <input type="checkbox" [value]="material.id" id="materialCheck{{i}}"
+                                                (change)="onCheckboxChange($event)">
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -100,7 +100,8 @@
                     </form>
                 </div>
                 <div class="row">
-                    <button (click)="createLesson(); newLesson = false; addMaterial = false" class="btn btn-secondary mx-auto">Criar
+                    <button (click)="createLesson(); newLesson = false; addMaterial = false"
+                        class="btn btn-secondary mx-auto">Criar
                         aula</button>
                 </div>
             </form>
@@ -115,7 +116,7 @@
     <div class="container">
         <accordion [isAnimated]="true">
             <div *ngFor="let lesson of lessons$ | async; let i = index;">
-                <accordion-group (click)="getLessonsMaterials(lesson, i)" heading="Aula {{i+1}} - {{lesson.title}}"
+                <accordion-group (click)="getLessonsMaterials(lesson, i); lessonRow(lesson)" heading="Aula {{i+1}} - {{lesson.title}}"
                     id="{{i}}">
                     <div *ngIf="isSuperUser">
                         <button type="button" class="btn-borderless btn-edit" (click)="editValid = true">
@@ -133,34 +134,48 @@
                                 <div *ngIf="editValid; else elseBlock">
                                     <form class="mg-5 mt-3 container" #newNoteForm="ngForm"
                                         (ngSubmit)="updateLesson(lesson)">
-                                        <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}" rows="1"
-                                            [(ngModel)]="lesson.title" name="title">
+                                        <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}"
+                                            rows="1" [(ngModel)]="lesson.title" name="title">
                                   {{lesson.title}}
                                 </textarea>
                                         <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
                                             [(ngModel)]="lesson.description" name="description">
-                                    {{lesson.description}}
+                                            {{lesson.description}}
                                   </textarea>
                                         <br>
                                         <div *ngIf="editValid">
                                             <button type="button" class="btn btn-secondary"
                                                 (click)="editValid = false; updateLesson(lesson)">Salvar
                                                 Aula</button> &nbsp;
-                                                <button type="button" class="btn btn-danger" (click)="editValid = false">X</button>
-                                            
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="editValid = false">X</button>
+
                                         </div>
                                     </form>
                                 </div>
                                 <ng-template #elseBlock>
                                     <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
                                         disabled>
-                                    {{lesson.description}}
+                                        {{lesson.description}}
                                 </textarea>
                                 </ng-template>
                             </div>
                         </div>
                         <hr>
-                        <p><b>Materiais:</b></p>
+
+                        <div style="display: inline-block;"><b>Materiais:</b></div>
+                        <!-- ICON EDITAR MATS -->
+                        <div *ngIf="isSuperUser" style="display: inline-block;">
+                            <button type="button" class="btn-borderless btn-edit" (click)="editMatValid = true ">
+                                <fa-icon [icon]="faEdit" size="lg"></fa-icon>
+                            </button>
+                            <!-- <button type="button" class="btn-borderless btn-delete"
+                                (click)="openModalDeleteLesson(templateDeleteLesson, i)">
+                                <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
+                            </button> -->
+                        </div>
+
+                        <!--DISPLAY MATS-->
                         <div *ngIf="showMats">
                             <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
                             <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary"
@@ -168,13 +183,58 @@
                                 triggers="mouseenter:mouseleave">{{material.title}}</a>
                         </div>
                         <hr>
-                        <p><b>Notas:</b></p>
-                        <div>
-                            <!-- <div>
-                        <p>{{lesson.name}}</p>
-                    </div> -->
-                            <hr>
+
+                        <div *ngIf="editMatValid">
+                            <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm">
+                                <div class="table-responsive">
+                                    <table class="table" [ngClass]='theme'>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    TÍTULO
+                                                </th>
+                                                <th>
+                                                    TIPO
+                                                </th>
+                                                <th>
+                                                    URL
+                                                </th>
+                                                <th class="text-center">
+                                                    Selecionar:
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let material of materials$ | async ; let i = index;" id="{{i}}">
+                                                <td>
+                                                    {{material.title}}
+                                                </td>
+                                                <td>
+                                                    {{material.type}}
+                                                </td>
+                                                <td>
+                                                    {{material.url}}
+                                                </td>
+                                                <td class="text-center">
+                                                    <input type="checkbox" [checked] =  "isSelected(material)" [value]="material.id" id="materialCheck{{i}}"
+                                                        (change)="onCheckboxChange($event)">
+                                                        <!-- <input type="checkbox" [checked] =  "isSelected(material)" [value]="material.id" id="materialCheck{{i}}"> -->
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <button type="button" class="btn btn-secondary"
+                                                (click)="editMatValid = false; updateLesson(lesson); getLessonsMaterials(lesson, i)">Adicionar Materiais</button> &nbsp;
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="editMatValid = false">X</button>
+                                </div>
+
+                            </form>
+
                         </div>
+
+
+
                     </div>
                 </accordion-group>
                 <br>
@@ -193,103 +253,6 @@
         </div>
     </ng-template>
 
-    <!-- Modal Editar Aula -->
-    <!-- <ng-template #templateEditLesson>
-        <div class="modal-header">
-            <h4 class="modal-title pull-left">Editar Aula</h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body container">
-            <form class="mg-5 mt-3 container" #editLessonForm="ngForm" (ngSubmit)="editLesson()">
-                <div class="form-group">
-                    <label for="títuloInput">Título:</label>
-                    <input type="text" class="form-control" id="tituloAula" [(ngModel)]="title" name="title">
-                </div>
-                <div>
-                    <div class="form-group">
-                        <label for="descricaoInput">Descrição:</label>
-                        <textarea class="form-control" id="descriçãoAula" rows="5" [(ngModel)]="description"
-                            name="description"></textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <label for="Materials">Materiais:</label>
-                    <br>
-                    <button class="btn btn-secondary mx-auto">Adicionar novo Material</button>
-                </div>
-                <br>
-                <div class="row">
-                    <button type="submit" class="btn btn-secondary mx-auto" (click)="modalRef.hide()">Gravar
-                        Aula</button>
-                    <button type="button" class="btn btn-danger mx-auto" (click)="modalRef.hide()">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </ng-template>
--->
+   
 
-
-    <!-- Modal Adicionar Materiais -->
-    <ng-template #templateAddMaterials>
-
-        <div class="modal-header ">
-            <h4 class="modal-title pull-left">Adicionar Materiais</h4>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-
-        <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm" (ngSubmit)="addMaterials()">
-            <!-- [formGroup]="form" -->
-            <div class="table-responsive">
-                <table class="table" [ngClass]='theme'>
-                    <thead>
-                        <tr>
-                            <th>
-                                TÍTULO
-                            </th>
-                            <th>
-                                TIPO
-                            </th>
-                            <th>
-                                URL
-                            </th>
-                            <th class="text-center">
-                                Selecionar:
-                            </th>
-                            <th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let material of materials$ | async ; let i = index;" id="{{i}}">
-                            <td>
-                                {{material.title}}
-                            </td>
-                            <td>
-                                {{material.type}}
-                            </td>
-                            <td>
-                                {{material.url}}
-                            </td>
-                            <td class="text-center">
-                                <input type="checkbox" [value]="material.id"
-                                    (change)="onCheckboxChange($event)">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-
-            <div class="row">
-
-
-                <button type="submit" class="btn btn-secondary mx-auto" (click)="modalRef.hide()">Adicionar
-                    Materiais</button>
-            </div>
-
-        </form>
-    </ng-template> -->
 </div>
