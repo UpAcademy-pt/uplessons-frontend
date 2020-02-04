@@ -6,6 +6,8 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { MaterialsService } from '../shared/services/materials.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { map } from 'rxjs/operators'
+import { faFile } from '@fortawesome/free-solid-svg-icons';
+import { PopoverModule } from 'ngx-bootstrap/popover'
 
 @Component({
   selector: 'app-materials',
@@ -18,7 +20,7 @@ export class MaterialsComponent implements OnInit {
   private showTable: boolean = false;
 
   public header = ["Titulo", "Tecnologia", "Url", "update", "delete"];
-  public headerAtt = ["title", "type", "url"];
+  public headerAtt = ["title", "type"];
   public materials$: ReplaySubject<any> = new ReplaySubject(1);
   private rowMaterialToDelete: number;
   public updateTo: number;
@@ -31,6 +33,7 @@ export class MaterialsComponent implements OnInit {
   public type: string;
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
+  faFile=faFile;
 
   filterValue: string;
 
@@ -126,8 +129,6 @@ export class MaterialsComponent implements OnInit {
     for (let i = 0; i < this.materials.length; i++) {
       if (rowIndex == this.materials[i]) {
         this.rowMaterialToDelete = i;
-        console.log(this.rowMaterialToDelete);
-        
       }
     }
     

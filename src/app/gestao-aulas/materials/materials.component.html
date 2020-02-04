@@ -33,7 +33,7 @@
         <input type="text" class="form-control" [(ngModel)]="filterValue" (keyup)="displayData()"
           placeholder="Search...">
       </div>
-      <div class="table-responsive ">
+      <div class="table-responsive">
         <table class="table" [ngClass]='theme'>
           <thead>
             <tr>
@@ -47,6 +47,13 @@
               <td *ngFor="let col of headerAtt"  style="width: 20%">
                 <i class="fas fa-file"></i>
                 <div>{{row[col]}}</div>
+              </td>
+              <td style="width: 20%">
+                <a href="{{(materialsdisplay$ | async)[i].url}}" target="_blank" type="button" class="btn-borderless btn-pop"
+                popover="{{(materialsdisplay$ | async)[i].url}}"
+                triggers="mouseenter:mouseleave">
+                  <fa-icon [icon]="faFile" size="lg"></fa-icon>
+                </a>
               </td>
               <td>
                 <button (click)="openModalUpdateMaterial(templateUpdatMaterial,row)" type="button" class="btn-borderless btn-edit">

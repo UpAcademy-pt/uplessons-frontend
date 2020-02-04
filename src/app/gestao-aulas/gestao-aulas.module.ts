@@ -19,6 +19,8 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { MaterialsComponent } from './materials/materials.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DisableControlDirective } from './notes/disable-control.directive';
+import { PopoverModule } from 'ngx-bootstrap/popover'
+
 
 
 
@@ -48,7 +50,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BsDropdownModule.forRoot(),
     PerfectScrollbarModule,
     FontAwesomeModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    PopoverModule.forRoot()
 
   ],
   providers: [
