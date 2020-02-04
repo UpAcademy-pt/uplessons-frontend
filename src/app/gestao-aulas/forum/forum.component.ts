@@ -19,11 +19,7 @@ export class ForumComponent implements OnInit {
 
   public validAnswers: AnswerForum[];
   public newQuestion: boolean = false;
-
-
-
   //public currentEdition: Edition;
-
 
   public title: string;
   public description: string;

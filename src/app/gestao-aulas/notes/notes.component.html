@@ -1,3 +1,4 @@
+<div class="scrollContainer">
 <h4>Notas</h4>
 
 <div *ngIf="!newNote; else alternativeBlock">
@@ -41,9 +42,10 @@
       </div>
     </div>
     <div class="row">
-      <button (click)="createNote(); newNote = false" class="btn btn-secondary mx-auto">Criar aula</button>
+      <button (click)="createNote(); newNote = false" class="btn btn-secondary mx-auto">Criar nota</button>
     </div>
   </form>
+  <hr>
 </div>
 
 
@@ -72,21 +74,19 @@
               <div *ngIf="editValid; else elseBlock">
                 <form class="mg-5 mt-3 container" #newNoteForm="ngForm" (ngSubmit)="updateNote(note)">
                   <textarea class="form-control" id="exampleFormControlTextareaTitle" rows="1" [(ngModel)]="note.title"
-                    name="title">
-                  {{note.title}}
+                    name="title">  {{note.title}}
                 </textarea>
                   <textarea class="form-control" id="formControlTextareaDescription" rows="3"
-                    [(ngModel)]="note.description" name="description">
-                    {{note.description}}
+                    [(ngModel)]="note.description" name="description">  {{note.description}}
                   </textarea>
                   <br>
                   <button type="button" class="btn btn-secondary" (click)="editValid = false; updateNote(note)">Salvar
-                    Nota</button>
+                    Nota</button>&nbsp;
+                    <button type="button" class="btn btn-danger" (click)="editValid = false">X</button>
                 </form>
               </div>
               <ng-template #elseBlock>
-                <textarea class="form-control" id="formControlTextareaDescription" rows="3" disabled>
-                    {{note.description}}
+                <textarea class="form-control" id="formControlTextareaDescription" rows="3" disabled>  {{note.description}}
                 </textarea>
               </ng-template>
             </div>
@@ -160,3 +160,4 @@
     <button type="button" class="btn btn-danger" (click)="deleteNoteById()" style="margin-left: 5px">Sim</button>
   </div>
 </ng-template>
+</div>

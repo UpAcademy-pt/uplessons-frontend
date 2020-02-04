@@ -1,5 +1,5 @@
-.active {
-   background-color: black;
+a.active {
+   background-color: rgb(77, 77, 77);
 }
 #dropdown-animated.show {
   display: table !important;
@@ -45,12 +45,14 @@
   
   #sidebar {
     color: #fff;
-    padding-left: 0.5rem;
+    background-color: #7b7b7b;
     height: 100%;
-    overflow-y: scroll;
+    float: left;
+
   
     a.active {
-      border-right: 10px ;
+      border-right: 10px solid #dd7d36;
+
     }
   }
   

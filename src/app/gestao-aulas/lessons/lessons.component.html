@@ -1,4 +1,4 @@
-<div style="height: 100%;">
+<div class="scrollContainer">
     <h4>Titulo da edicao selecionada no side bar</h4>
 
     <!--  openModaladdMaterials(templateAddMaterials)                                  (ngSubmit)="addMaterials()"-->
@@ -11,7 +11,7 @@
         </div>
         <ng-template #alternativeBlock>
             <div class="container" style="text-align: right; padding-right: 15px;">
-                <button type="button" class="btn btn-danger" (click)="newLesson = false; addMaterial = false">X</button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="newLesson = false; addMaterial = false">X</button>
             </div>
         </ng-template>
         <div *ngIf="newLesson">
@@ -28,7 +28,7 @@
                     <label for="type" class="col-sm-2 col-form-label">Descriçao:</label>
                     <div class="col-sm-10">
                         <textarea [(ngModel)]="description" name="description" id="description" type="text"
-                            class="form-control" placeholder="Insira a descriçao da aula" rows="5"></textarea>
+                            class="form-control" placeholder="Insira a descriçao da aula" rows="3"></textarea>
                     </div>
                 </div>
                 <div *ngIf="!addMaterial; else alternativeBlock">
@@ -39,8 +39,8 @@
                     </div>
                 </div>
                 <ng-template #alternativeBlock>
-                    <div class="container" style="text-align: right; padding-right: 15px;">
-                        <button type="button" class="btn btn-danger"
+                    <div class="container" style="text-align: right; padding-right: 0px; padding-left: 0px">
+                        <button type="button" class="btn btn-danger btn-sm"
                             (click)="addMaterial = false ; clearCheckArray()">X</button>
                     </div>
                 </ng-template>
@@ -105,6 +105,7 @@
                         aula</button>
                 </div>
             </form>
+            <hr>
         </div>
     </div>
     <br>
@@ -134,22 +135,19 @@
                                 <div *ngIf="editValid; else elseBlock">
                                     <form class="mg-5 mt-3 container" #newNoteForm="ngForm"
                                         (ngSubmit)="updateLesson(lesson)">
-                                        <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}"
-                                            rows="1" [(ngModel)]="lesson.title" name="title">
-                                  {{lesson.title}}
+                                        <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}" rows="1"
+                                            [(ngModel)]="lesson.title" name="title">  {{lesson.title}}
                                 </textarea>
                                         <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
-                                            [(ngModel)]="lesson.description" name="description">
-                                            {{lesson.description}}
+                                            [(ngModel)]="lesson.description" name="description">  {{lesson.description}}
                                   </textarea>
                                         <br>
                                         <div *ngIf="editValid">
                                             <button type="button" class="btn btn-secondary"
                                                 (click)="editValid = false; updateLesson(lesson)">Salvar
                                                 Aula</button> &nbsp;
-                                            <button type="button" class="btn btn-danger"
-                                                (click)="editValid = false">X</button>
-
+                                                <button type="button" class="btn btn-danger" (click)="editValid = false; updateLessons$()">X</button>
+                                            
                                         </div>
                                     </form>
                                 </div>
@@ -253,6 +251,103 @@
         </div>
     </ng-template>
 
-   
+    <!-- Modal Editar Aula -->
+    <!-- <ng-template #templateEditLesson>
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">Editar Aula</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body container">
+            <form class="mg-5 mt-3 container" #editLessonForm="ngForm" (ngSubmit)="editLesson()">
+                <div class="form-group">
+                    <label for="títuloInput">Título:</label>
+                    <input type="text" class="form-control" id="tituloAula" [(ngModel)]="title" name="title">
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="descricaoInput">Descrição:</label>
+                        <textarea class="form-control" id="descriçãoAula" rows="5" [(ngModel)]="description"
+                            name="description"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="Materials">Materiais:</label>
+                    <br>
+                    <button class="btn btn-secondary mx-auto">Adicionar novo Material</button>
+                </div>
+                <br>
+                <div class="row">
+                    <button type="submit" class="btn btn-secondary mx-auto" (click)="modalRef.hide()">Gravar
+                        Aula</button>
+                    <button type="button" class="btn btn-danger mx-auto" (click)="modalRef.hide()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </ng-template>
+-->
 
+
+    <!-- Modal Adicionar Materiais -->
+    <ng-template #templateAddMaterials>
+
+        <div class="modal-header ">
+            <h4 class="modal-title pull-left">Adicionar Materiais</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm" (ngSubmit)="addMaterials()">
+            <!-- [formGroup]="form" -->
+            <div class="table-responsive">
+                <table class="table" [ngClass]='theme'>
+                    <thead>
+                        <tr>
+                            <th>
+                                TÍTULO
+                            </th>
+                            <th>
+                                TIPO
+                            </th>
+                            <th>
+                                URL
+                            </th>
+                            <th class="text-center">
+                                Selecionar:
+                            </th>
+                            <th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let material of materials$ | async ; let i = index;" id="{{i}}">
+                            <td>
+                                {{material.title}}
+                            </td>
+                            <td>
+                                {{material.type}}
+                            </td>
+                            <td>
+                                {{material.url}}
+                            </td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" [value]="material.id"
+                                    (change)="onCheckboxChange($event)">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="row">
+
+
+                <button type="submit" class="btn btn-secondary mx-auto" (click)="modalRef.hide()">Adicionar
+                    Materiais</button>
+            </div>
+
+        </form>
+    </ng-template>
 </div>

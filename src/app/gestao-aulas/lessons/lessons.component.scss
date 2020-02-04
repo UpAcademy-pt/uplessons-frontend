@@ -14,3 +14,11 @@
     background-color: #b52d3a;
     border-color: #b52d3a;
 }
+
+.scrollContainer {
+    height: 100%;
+    overflow-y: scroll;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+}
