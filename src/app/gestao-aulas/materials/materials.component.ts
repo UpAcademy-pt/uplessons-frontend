@@ -26,6 +26,7 @@ export class MaterialsComponent implements OnInit {
   public updateTo: number;
   private materialToUpdate: Materials = new Materials();
   public materialsdisplay$: Observable<any[]>;
+  public newMaterial: boolean = false;
 
   modalRef: BsModalRef;
   public title: string;

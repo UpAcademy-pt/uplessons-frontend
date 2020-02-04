@@ -9,7 +9,7 @@
 </div>
 <ng-template #alternativeBlock>
   <div class="container" style="text-align: right; padding-right: 15px;">
-    <button type="button" class="btn btn-danger" (click)="newNote = false">X</button>
+    <button type="button" class="btn btn-secondary btn-sm" (click)="newNote = false">X</button>
   </div>
 </ng-template>
 <div *ngIf="newNote">
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="row">
-      <button (click)="createNote(); newNote = false" class="btn btn-secondary mx-auto">Criar nota</button>
+      <button (click)="createNote(); newNote = false" class="btn btn-secondary mx-auto validar">Criar nota</button>
     </div>
   </form>
   <hr>
@@ -80,9 +80,9 @@
                     [(ngModel)]="note.description" name="description">  {{note.description}}
                   </textarea>
                   <br>
-                  <button type="button" class="btn btn-secondary" (click)="editValid = false; updateNote(note)">Salvar
+                  <button type="button" class="btn btn-secondary validar" (click)="editValid = false; updateNote(note)">Salvar
                     Nota</button>&nbsp;
-                    <button type="button" class="btn btn-danger" (click)="editValid = false">X</button>
+                    <button type="button" class="btn btn-secondary" (click)="editValid = false">X</button>
                 </form>
               </div>
               <ng-template #elseBlock>
