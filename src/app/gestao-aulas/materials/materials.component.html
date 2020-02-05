@@ -1,6 +1,18 @@
 <div class="scrollContainer">
-  <h4>Materiais de apoio</h4>
-<div>
+  <h3>Materiais de apoio</h3>
+
+    <div *ngIf="!newMaterial; else alternativeBlock">
+      <div class="container" style="text-align: right; padding-right: 15px;">
+        <button type="button" class="btn btn-secondary" (click)="newMaterial = true">Criar novo
+          material</button>
+      </div>
+    </div>
+    <ng-template #alternativeBlock>
+      <div class="container" style="text-align: right; padding-right: 15px;">
+        <button type="button" class="btn btn-secondary btn-sm" (click)="newMaterial = false">X</button>
+      </div>
+    </ng-template>
+    <div *ngIf="newMaterial">
       <h4 class="text-center"><b>Criar novo material:</b></h4>
     <form class="mg-5 mt-3 container" #updateMaterial="ngForm" (ngSubmit)="createMaterial()">
         <div class="form-group row">
@@ -22,13 +34,16 @@
             type="text" class="form-control" placeholder="Coloque o link" required>
           </div>
           </div>
-        <div class="row float-right">
-          <button type="submit" [disabled]="!updateMaterial.valid" class="btn btn-secondary">Criar</button>
+        <div class="row">
+          <button type="submit" [disabled]="!updateMaterial.valid" class="btn btn-secondary validar mx-auto">Criar material</button>
         </div>
-      
       </form>
-       <hr>
-      <br>
+      <hr>
+    </div>
+    <br>
+
+    <!--                                      Tabela Materiais                               -->
+
       <div class="input-group mb-3 col-12 col-sm-3 pl-0">
         <input type="text" class="form-control" [(ngModel)]="filterValue" (keyup)="displayData()"
           placeholder="Search...">
@@ -70,8 +85,6 @@
         </table>
       </div>
 
-
-</div>
 <ng-template #templateUpdatMaterial>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Atualizar material</h4>
@@ -101,7 +114,7 @@
         </div>
       </div>
       <div class="row">
-        <button class="btn btn-primary mx-auto" (click)="updateMat()">Atualizar</button>
+        <button class="btn btn-secondary validar mx-auto" (click)="updateMat()">Atualizar</button>
       </div>
     </div>
   </div>

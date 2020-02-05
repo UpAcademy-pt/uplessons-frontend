@@ -1,4 +1,4 @@
-<div>
+<div class="scrollContainer">
     <h3>Forum</h3>
 
 
@@ -10,7 +10,7 @@
     </div>
     <ng-template #alternativeBlock>
         <div class="container" style="text-align: right; padding-right: 15px;">
-            <button type="button" class="btn btn-danger" (click)="newQuestion = false">X</button>
+            <button type="button" class="btn btn-secondary" (click)="newQuestion = false">X</button>
         </div>
     </ng-template>
 
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="row">
-                <button type="submit" class="btn btn-secondary mx-auto">Criar</button>
+                <button type="submit" class="btn btn-secondary mx-auto validar">Criar</button>
             </div>
         </form>
     </div>
@@ -43,34 +43,34 @@
     <div *ngIf="questions$ ==null">
         <p>Atualmente nao existem perguntas</p>
     </div>
-
-    <div>
-        <accordion [isAnimated]="true">
-            <div *ngFor="let question of questions$ | async; let i = index; ">
-            <accordion-group heading="{{question.title}}"
-                id="{{i}}" (click)="getAnswersByQuestionId(question.id, i)">
-                <div>
-                    <p><b>Descriçao:</b></p>
-                    <p>{{question.description}}</p>
-                    <hr>
-
-
-                    <!-- nao esta a funcionar: -->
-                    <!-- <div *ngIf="answers$ !=null"> -->
-                    <div>
-                        <p><b>Respostas:</b></p>
-                        <hr>
-
-                        <div *ngFor="let answer of answers$ | async ">
-                            {{answer.answer}}
+    <div class="container">
+        <div>
+            <accordion [isAnimated]="true">
+                <div *ngFor="let question of questions$ | async; let i = index; ">
+                    <accordion-group heading="Pergunta {{i+1}} - {{question.title}}" id="{{i}}"
+                        (click)="getAnswersByQuestionId(question.id, i)">
+                        <div>
+                            <p>{{question.description}}</p>
                             <hr>
-                        </div>
-                    </div>
-                </div>
-            </accordion-group>
-            <br>
-        </div>
-        </accordion>
-    </div>
 
+
+                            <!-- nao esta a funcionar: -->
+                            <!-- <div *ngIf="answers$ !=null"> -->
+                            <div>
+                                <p><b>Respostas:</b></p>
+                                <hr>
+
+                                <div *ngFor="let answer of answers$ | async ">
+                                    {{answer.answer}}
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </accordion-group>
+                    <br>
+                </div>
+            </accordion>
+        </div>
+
+    </div>
 </div>

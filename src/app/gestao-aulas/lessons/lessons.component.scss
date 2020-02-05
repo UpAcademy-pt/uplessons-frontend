@@ -34,3 +34,8 @@
 .btn-delete:hover {
     color: #b52d3a;
 }
+
+.table-responsive {
+    max-height: 250px;
+    overflow-y: scroll;
+}
