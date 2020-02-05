@@ -1,41 +1,55 @@
 .btn-borderless {
-    width: 30px;
-    height: 30px;
-    border-color: transparent;
-    background-color: transparent;
-    color: #343a40;
+  width: 30px;
+  height: 30px;
+  border-color: transparent;
+  background-color: transparent;
+  color: #343a40;
 }
 
 .btn-secondary {
-    background-color: #343a40;
+  background-color: #343a40;
 }
 
 .btn-danger {
-    background-color: #b52d3a;
-    border-color: #b52d3a;
+  background-color: #b52d3a;
+  border-color: #b52d3a;
 }
 
 .scrollContainer {
-    height: 100%;
-    overflow-y: scroll;
-    padding-left: 20px;
-    padding-top: 20px;
-    padding-right: 20px;
+  height: 100%;
+  overflow-y: scroll;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
 }
 
 .validar {
-    background-color: rgb(222, 137, 57);
-    border-color: rgb(222, 137, 57);
+  background-color: rgb(222, 137, 57);
+  border-color: rgb(222, 137, 57);
 }
 .btn-edit:hover {
-    color: rgb(222, 137, 57);
+  color: rgb(222, 137, 57);
 }
 
 .btn-delete:hover {
-    color: #b52d3a;
+  color: #b52d3a;
 }
 
 .table-responsive {
-    max-height: 250px;
-    overflow-y: scroll;
+  max-height: 250px;
+  overflow-y: scroll;
+}
+
+ ::ng-deep .btn-link {
+   color: rgb(222, 137, 57) !important;
+ }
+
+::ng-deep .card.customClass,
+.card.customClass .card-header,
+.panel.customClass {
+  background-color: #343a40ad;
+  color: rgb(0, 0, 0);
+}
+::ng-deep .panel.customClass .panel-body {
+  background-color: #ffffff;
 }
