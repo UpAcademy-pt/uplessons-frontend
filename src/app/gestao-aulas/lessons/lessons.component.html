@@ -162,7 +162,7 @@
                         <div *ngIf="showMats">
                             <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
                             <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary validar"
-                                href="{{material.url}}" role="button" target="_blank" popover="I will hide on blur"
+                                href="{{material.url}}" role="button" target="_blank" popover="{{material.url}}"
                                 triggers="mouseenter:mouseleave">{{material.title}}</a>
                         </div>
                        <!-- <hr>
