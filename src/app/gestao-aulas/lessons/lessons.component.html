@@ -11,7 +11,7 @@
         </div>
         <ng-template #alternativeBlock>
             <div class="container" style="text-align: right; padding-right: 15px;">
-                <button type="button" class="btn btn-danger btn-sm" (click)="newLesson = false; addMaterial = false">X</button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="newLesson = false; addMaterial = false">X</button>
             </div>
         </ng-template>
         <div *ngIf="newLesson">
@@ -40,7 +40,7 @@
                 </div>
                 <ng-template #alternativeBlock>
                     <div class="container" style="text-align: right; padding-right: 0px; padding-left: 0px">
-                        <button type="button" class="btn btn-danger btn-sm"
+                        <button type="button" class="btn btn-secondary btn-sm"
                             (click)="addMaterial = false ; clearCheckArray()">X</button>
                     </div>
                 </ng-template>
@@ -143,10 +143,10 @@
                                   </textarea>
                                         <br>
                                         <div *ngIf="editValid">
-                                            <button type="button" class="btn btn-secondary"
+                                            <button type="button" class="btn btn-secondary validar"
                                                 (click)="editValid = false; updateLesson(lesson)">Salvar
                                                 Aula</button> &nbsp;
-                                                <button type="button" class="btn btn-danger" (click)="editValid = false; updateLessons$()">X</button>
+                                                <button type="button" class="btn btn-secondary" (click)="editValid = false; updateLessons$()">X</button>
                                             
                                         </div>
                                     </form>
@@ -176,7 +176,7 @@
                         <!--DISPLAY MATS-->
                         <div *ngIf="showMats">
                             <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
-                            <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary"
+                            <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary validar"
                                 href="{{material.url}}" role="button" target="_blank" popover="I will hide on blur"
                                 triggers="mouseenter:mouseleave">{{material.title}}</a>
                         </div>
@@ -226,13 +226,8 @@
                                             <button type="button" class="btn btn-danger"
                                                 (click)="editMatValid = false">X</button>
                                 </div>
-
                             </form>
-
                         </div>
-
-
-
                     </div>
                 </accordion-group>
                 <br>
