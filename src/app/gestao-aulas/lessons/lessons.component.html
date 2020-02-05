@@ -1,15 +1,12 @@
 <div class="scrollContainer">
     <div style="float: left">
     <h3 *ngIf="edtions$ | async">{{edtions[rowForEditions].name}}</h3>
-
-    
           
-         
         </div>
         <div *ngIf="isSuperUser">
             <div *ngIf="!newLesson; else alternativeBlock"style="float: right" >
                 <div class="container" style="text-align: right; padding-right: 15px;">
-                    <button type="button" class="btn btn-secondary btn-lg" (click)="newLesson = true">+</button>
+                    <button type="button" class="btn btn-secondary validar btn-lg" (click)="newLesson = true">+</button>
                 </div>
             </div>
             <ng-template #alternativeBlock>
