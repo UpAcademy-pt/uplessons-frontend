@@ -37,6 +37,8 @@ export class LessonsComponent implements OnInit {
   private matsDisplay:any [];
   public showMats:boolean= false;
   editValid: boolean = false;
+  editMatValid: boolean = false;
+  checkedValue: boolean = false;
   public newLesson: boolean = false;
   
   public title: string;
@@ -186,7 +188,9 @@ export class LessonsComponent implements OnInit {
     this.apiLesson.updateLesson(this.lesson).subscribe(
       (res:any) => {
         this.lessons.splice(this.lessons.findIndex(element => element.id === lesson.id), 1, lesson);
-       // this.lessons[this.indexOfLessonToEdit] = this.lesson;
+        console.log(lesson);
+
+        // this.lessons[this.indexOfLessonToEdit] = this.lesson;
         this.updateLessons$();
       }
     );
@@ -244,16 +248,40 @@ export class LessonsComponent implements OnInit {
       this.idMatAdded.push(id);
     });
     console.log("idMatAdded: ", this.idMatAdded);
+
   }
 
   public clearCheckArray(){
     this.checkArray.clear();
     this.idMatAdded = new Array();
-    console.log(this.checkArray.value);
-    console.log(this.idMatAdded);
-    
-
   }
+
+  public lessonForMaterialEdit: any;
+
+  public lessonRow(lesson: Lesson) {
+    this.lessonForMaterialEdit = lesson.materialsIds;
+    console.log(this.idMatAdded);
+    console.log(this.lessonForMaterialEdit);
+  }
+
+ 
+ public isSelected(material: Materials) {
+    let found: boolean = false;
+   this.idMatAdded = new Array();
+    for (let i = 0; i < this.lessonForMaterialEdit.length; i++) {
+      if (this.lessonForMaterialEdit[i] === material.id) {
+        found = true;
+       this.idMatAdded.push(this.lessonForMaterialEdit[i])
+        break;
+      }
+    }
+    return found;
+  }
+
+
+
+
+
 
 
 }
