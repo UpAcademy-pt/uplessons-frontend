@@ -11,12 +11,13 @@
         </div>
         <ng-template #alternativeBlock>
             <div class="container" style="text-align: right; padding-right: 15px;">
-                <button type="button" class="btn btn-secondary btn-sm" (click)="newLesson = false; addMaterial = false">X</button>
+                <button type="button" class="btn btn-secondary btn-sm"
+                    (click)="newLesson = false; addMaterial = false">X</button>
             </div>
         </ng-template>
         <div *ngIf="newLesson">
             <h4 class="text-center"><b>Criar nova aula:</b></h4>
-            <form class="mg-5 mt-3 container">
+            <div class="mg-5 mt-3 container">
                 <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Titulo:</label>
                     <div class="col-sm-10">
@@ -47,6 +48,11 @@
                 <div *ngIf="addMaterial" class="form-group row">
                     <div>
                         <h4 class="modal-title pull-left">Adicionar Materiais:</h4>
+
+                    </div>
+                    <div class="input-group mb-3 col-12 col-sm-3 pl-0">
+                        <input type="text" class="form-control" [(ngModel)]="filterValue" (keyup)="displayData()"
+                            placeholder="Search...">
                     </div>
                     <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm">
                         <!-- [formGroup]="form" -->
@@ -69,7 +75,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let material of materials$ | async ; let i = index;" id="{{i}}">
+                                    <tr *ngFor="let material of materialsdisplaytoAdd$ | async ; let i = index;"
+                                        id="{{i}}">
                                         <td>
                                             {{material.title}}
                                         </td>
@@ -104,7 +111,7 @@
                         class="btn btn-secondary mx-auto">Criar
                         aula</button>
                 </div>
-            </form>
+            </div>
             <hr>
         </div>
     </div>
@@ -117,8 +124,8 @@
     <div class="container">
         <accordion [isAnimated]="true">
             <div *ngFor="let lesson of lessons$ | async; let i = index;">
-                <accordion-group (click)="getLessonsMaterials(lesson, i); lessonRow(lesson)" heading="Aula {{i+1}} - {{lesson.title}}"
-                    id="{{i}}" panelClass="customClass">
+                <accordion-group (click)="getLessonsMaterials(lesson, i); lessonRow(lesson)"
+                    heading="Aula {{i+1}} - {{lesson.title}}" id="{{i}}" panelClass="customClass">
                     <div *ngIf="isSuperUser" style="float: right;">
                         <button type="button" class="btn-borderless btn-edit" (click)="editValid = true">
                             <fa-icon [icon]="faEdit" size="lg"></fa-icon>
@@ -134,10 +141,10 @@
                         <div>
                             <div class="form-group">
                                 <div *ngIf="editValid; else elseBlock">
-                                    <form class="mg-5 mt-3 container" #newNoteForm="ngForm"
+                                    <div class="mg-5 mt-3 container"
                                         (ngSubmit)="updateLesson(lesson)">
-                                        <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}" rows="1"
-                                            [(ngModel)]="lesson.title" name="title">  {{lesson.title}}
+                                        <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}"
+                                            rows="1" [(ngModel)]="lesson.title" name="title">  {{lesson.title}}
                                         </textarea>
                                         <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
                                             [(ngModel)]="lesson.description" name="description">  {{lesson.description}}
@@ -145,6 +152,10 @@
                                         <br>
                                         <div>
                                             <h4 class="modal-title pull-left">Adicionar Materiais:</h4>
+                                        </div>
+                                        <div class="input-group mb-3 col-12 col-sm-3 pl-0">
+                                            <input type="text" class="form-control" [(ngModel)]="filterValue" (keyup)="displayData()"
+                                                placeholder="Search...">
                                         </div>
                                         <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm">
                                             <!-- [formGroup]="form" -->
@@ -167,7 +178,8 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let material of materials$ | async ; let i = index;" id="{{i}}">
+                                                        <tr *ngFor="let material of materialsdisplaytoAdd$ | async ; let i = index;"
+                                                            id="{{i}}">
                                                             <td>
                                                                 {{material.title}}
                                                             </td>
@@ -177,48 +189,51 @@
                                                             <td>
                                                                 {{material.url}}
                                                             </td>
-                                                            <td   class="text-center">
+                                                            <td class="text-center">
                                                                 <!-- <input class="form-check-input" type="checkbox" [value]="material.id"
                                                                     (change)="onCheckboxChange($event)"> -->
                                                                 <input type="checkbox" [value]="material.id"
-                                                                    id="materialCheck{{i}}" (change)="onCheckboxChange(material.id, $event)">
-                                                            </td >
+                                                                    id="materialCheck{{i}}"
+                                                                    (change)="onCheckboxChange(material.id, $event)">
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
-                    
-                    
+
+
                                             <!-- <div class="row">
                                                 <button type="button" class="btn btn-secondary mx-auto"
                                                     (click)=" addMaterial = false">Adicionar
                                                     Materiais</button>
                                             </div> -->
-                    
+
                                         </form><br>
-                                        
+
                                         <div *ngIf="editValid">
                                             <button type="button" class="btn btn-secondary validar"
                                                 (click)="editValid = false; updateLesson(lesson)">Salvar
                                                 Aula</button> &nbsp;
-                                                <button type="button" class="btn btn-secondary" (click)="editValid = false; updateLessons$()">X</button>
-                                            
+                                            <button type="button" class="btn btn-secondary"
+                                                (click)="editValid = false; updateLessons$()">X</button>
+
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                                 <ng-template #elseBlock>
                                     <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
                                         disabled>
                                         {{lesson.description}}
                                 </textarea>
-                                <hr>
-                                <p><b>Materiais:</b></p>
-                        <div *ngIf="showMats">
-                            <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
-                            <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary validar"
-                                href="{{material.url}}" role="button" target="_blank" popover="{{material.url}}"
-                                triggers="mouseenter:mouseleave" style="margin-right: 10px;">{{material.title}}</a>
-                        </div>
+                                    <hr>
+                                    <p><b>Materiais:</b></p>
+                                    <div *ngIf="showMats">
+                                        <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
+                                        <a *ngFor="let material of (materialsDisplay$ | async)[i]"
+                                            class="btn btn-secondary validar" href="{{material.url}}" role="button"
+                                            target="_blank" popover="{{material.url}}" triggers="mouseenter:mouseleave"
+                                            style="margin-right: 10px;">{{material.title}}</a>
+                                    </div>
                                 </ng-template>
                             </div>
                         </div>
@@ -256,17 +271,19 @@
                                                     {{material.url}}
                                                 </td>
                                                 <td class="text-center">
-                                                    <input type="checkbox" [checked] =  "isSelected(material)" [value]="material.id" id="materialCheck{{i}}"
+                                                    <input type="checkbox" [checked]="isSelected(material)"
+                                                        [value]="material.id" id="materialCheck{{i}}"
                                                         (change)="onCheckboxChange(material.id, $event)">
-                                                        <!-- <input type="checkbox" [checked] =  "isSelected(material)" [value]="material.id" id="materialCheck{{i}}"> -->
+                                                    <!-- <input type="checkbox" [checked] =  "isSelected(material)" [value]="material.id" id="materialCheck{{i}}"> -->
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <button type="button" class="btn btn-secondary"
-                                                (click)="editMatValid = false; updateLesson(lesson); getLessonsMaterials(lesson, i)">Adicionar Materiais</button> &nbsp;
-                                            <button type="button" class="btn btn-danger"
-                                                (click)="editMatValid = false; clearCheckArray()">X</button>
+                                        (click)="editMatValid = false; updateLesson(lesson); getLessonsMaterials(lesson, i)">Adicionar
+                                        Materiais</button> &nbsp;
+                                    <button type="button" class="btn btn-danger"
+                                        (click)="editMatValid = false; clearCheckArray()">X</button>
                                 </div>
                             </form>
                         </div>
