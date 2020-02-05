@@ -175,13 +175,15 @@ export class LessonsComponent implements OnInit {
   // }
 
   public updateLesson(lesson: Lesson) {
-
-  //   this.lesson.id = this.lessons[this.indexOfLessonToEdit].id
-  //   this.lesson.description = this.description;
-  //   this.lesson.title = this.title;
-  //  /*  this.lesson.materialsIds = this.materials.id; */
-
-    this.apiLesson.updateLesson(lesson).subscribe(
+    console.log(this.lesson);
+    console.log(lesson);
+    
+    this.lesson.id = lesson.id;
+    this.lesson.description = lesson.description;
+    this.lesson.title = lesson.title;
+    this.lesson.materialsIds = this.idMatAdded;
+    this.lesson.editionId = lesson.editionId;
+    this.apiLesson.updateLesson(this.lesson).subscribe(
       (res:any) => {
         this.lessons.splice(this.lessons.findIndex(element => element.id === lesson.id), 1, lesson);
        // this.lessons[this.indexOfLessonToEdit] = this.lesson;
