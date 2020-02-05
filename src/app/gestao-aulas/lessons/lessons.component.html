@@ -136,11 +136,65 @@
                                         (ngSubmit)="updateLesson(lesson)">
                                         <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}" rows="1"
                                             [(ngModel)]="lesson.title" name="title">  {{lesson.title}}
-                                </textarea>
+                                        </textarea>
                                         <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
                                             [(ngModel)]="lesson.description" name="description">  {{lesson.description}}
-                                  </textarea>
+                                        </textarea>
                                         <br>
+                                        <div>
+                                            <h4 class="modal-title pull-left">Adicionar Materiais:</h4>
+                                        </div>
+                                        <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm">
+                                            <!-- [formGroup]="form" -->
+                                            <div class="table-responsive">
+                                                <table class="table" [ngClass]='theme'>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                TÍTULO
+                                                            </th>
+                                                            <th>
+                                                                TIPO
+                                                            </th>
+                                                            <th>
+                                                                URL
+                                                            </th>
+                                                            <th class="text-center">
+                                                                Selecionar:
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let material of materials$ | async ; let i = index;" id="{{i}}">
+                                                            <td>
+                                                                {{material.title}}
+                                                            </td>
+                                                            <td>
+                                                                {{material.type}}
+                                                            </td>
+                                                            <td>
+                                                                {{material.url}}
+                                                            </td>
+                                                            <td   class="text-center">
+                                                                <!-- <input class="form-check-input" type="checkbox" [value]="material.id"
+                                                                    (change)="onCheckboxChange($event)"> -->
+                                                                <input type="checkbox" [value]="material.id"
+                                                                    id="materialCheck{{i}}" (change)="onCheckboxChange($event)">
+                                                            </td >
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                    
+                    
+                                            <!-- <div class="row">
+                                                <button type="button" class="btn btn-secondary mx-auto"
+                                                    (click)=" addMaterial = false">Adicionar
+                                                    Materiais</button>
+                                            </div> -->
+                    
+                                        </form><br>
+                                        
                                         <div *ngIf="editValid">
                                             <button type="button" class="btn btn-secondary validar"
                                                 (click)="editValid = false; updateLesson(lesson)">Salvar
@@ -154,16 +208,16 @@
                                     <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
                                         disabled>  {{lesson.description}}
                                 </textarea>
-                                </ng-template>
-                            </div>
-                        </div>
-                        <hr>
-                        <p><b>Materiais:</b></p>
+                                <hr>
+                                <p><b>Materiais:</b></p>
                         <div *ngIf="showMats">
                             <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
                             <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary validar"
                                 href="{{material.url}}" role="button" target="_blank" popover="{{material.url}}"
-                                triggers="mouseenter:mouseleave">{{material.title}}</a>
+                                triggers="mouseenter:mouseleave" style="margin-right: 10px;">{{material.title}}</a>
+                        </div>
+                                </ng-template>
+                            </div>
                         </div>
                        <!-- <hr>
                         <p><b>Notas:</b></p>
