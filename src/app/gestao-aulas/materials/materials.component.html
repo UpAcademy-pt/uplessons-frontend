@@ -1,25 +1,27 @@
 <div class="scrollContainer">
+  <div style="float: left">
   <h3>Materiais de apoio</h3>
-
-    <div *ngIf="!newMaterial; else alternativeBlock">
+</div>
+    <div *ngIf="!newMaterial; else alternativeBlock" style="float: right">
       <div class="container" style="text-align: right; padding-right: 15px;">
-        <button type="button" class="btn btn-secondary" (click)="newMaterial = true">Criar novo
-          material</button>
+        <button type="button" class="btn btn-secondary btn-lg" (click)="newMaterial = true">+</button>
       </div>
     </div>
     <ng-template #alternativeBlock>
       <div class="container" style="text-align: right; padding-right: 15px;">
         <button type="button" class="btn btn-secondary btn-sm" (click)="newMaterial = false">X</button>
       </div>
+      <div style="clear: both;"></div>
     </ng-template>
+    <br>
     <div *ngIf="newMaterial">
       <h4 class="text-center"><b>Criar novo material:</b></h4>
     <form class="mg-5 mt-3 container" #updateMaterial="ngForm" (ngSubmit)="createMaterial()">
         <div class="form-group row">
-          <label for="title" class="col-sm-1 col-form-label">Titulo:</label>
+          <label for="title" class="col-sm-1 col-form-label">Título:</label>
           <div class="col-sm-3">
             <input [(ngModel)]="title" name="title" id="title"
-              type="text" class="form-control" placeholder="Titulo ate 10 caracteres" required maxlength="10">
+              type="text" class="form-control" placeholder="Título ate 10 caracteres" required maxlength="10">
              <!--  <small class="text-danger" [hidden]="title.valid || !title.touched">Digite a titulo no
                 maximo de 10 caracteres!</small> -->
           </div>
@@ -93,7 +95,7 @@
     Atualize os dados abaixo:
     <div class="mg-5 mt-3 container">
       <div class="form-group row">
-        <label for="tituloUpdate" class="col-sm-2 col-form-label">Titulo:</label>
+        <label for="tituloUpdate" class="col-sm-2 col-form-label">Título:</label>
         <div class="col-sm-10">
           <input  [(ngModel)]="materialToUpdate.title" name="title" id="tituloUpdate" type="text"
           class="form-control">
