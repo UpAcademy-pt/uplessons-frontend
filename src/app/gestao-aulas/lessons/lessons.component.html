@@ -1,5 +1,5 @@
 <div class="scrollContainer">
-    <h3>Titulo da edicao selecionada no side bar</h3>
+    <h3 *ngIf="edtions$ | async">{{edtions[rowForEditions].name}}</h3>
 
     <!--  openModaladdMaterials(templateAddMaterials)                                  (ngSubmit)="addMaterials()"-->
     <div *ngIf="isSuperUser">

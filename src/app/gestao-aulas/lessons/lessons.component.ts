@@ -198,16 +198,6 @@ export class LessonsComponent implements OnInit {
   // ------------
 
   public getLessonsMaterials(lesson: Lesson,i :number){
-
-    // let materials_array = []
-    // for (let i = 0; i < lesson.materialsIds.length; i++) {
-    //   materials_array.push(this.materials[i]);
-    // };
-    // this.matsDisplay.splice(i, 1, materials_array);
-    // console.log(this.matsDisplay);
-    // this.materialsDisplay$.next(this.matsDisplay);
-    // this.showMats = true;
-
     this.materialsApi.getMaterialsById(lesson.id).subscribe(
       (data:any )=> {
         this.matsDisplay.splice(i,1,data);

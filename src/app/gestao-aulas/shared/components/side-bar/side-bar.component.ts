@@ -20,6 +20,7 @@ export class SideBarComponent implements OnInit {
   private edtions: Edition[];
   private edtions$: ReplaySubject<any> = new ReplaySubject(1);
   private userName: string;
+  public aulasshow:boolean;
 
 
   constructor(
@@ -33,6 +34,11 @@ export class SideBarComponent implements OnInit {
     this.serviceApi.getEditions().subscribe(
       (data:any) =>{
         this.edtions= data;
+        if (data.length <1) {
+          this.aulasshow= true
+        }
+        console.log(this.aulasshow);
+        
         this.edtions$.next(data);
       }
     );
