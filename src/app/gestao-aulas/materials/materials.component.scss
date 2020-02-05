@@ -11,11 +11,14 @@
 }
 
 .btn-delete:hover {
-    color: red;
+    color: #b52d3a;
+}.btn-pop:hover {
+    color:rgb(222, 137, 57);
 }
 
-.teste1 {
-    overflow-x: scroll;
+.table-responsive {
+    max-height: 350px;
+    overflow-y: scroll;
 }
 table {
     table-layout: fixed;
