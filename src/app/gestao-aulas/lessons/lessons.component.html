@@ -117,8 +117,8 @@
         <accordion [isAnimated]="true">
             <div *ngFor="let lesson of lessons$ | async; let i = index;">
                 <accordion-group (click)="getLessonsMaterials(lesson, i)" heading="Aula {{i+1}} - {{lesson.title}}"
-                    id="{{i}}">
-                    <div *ngIf="isSuperUser">
+                    id="{{i}}" panelClass="customClass">
+                    <div *ngIf="isSuperUser" style="float: right;">
                         <button type="button" class="btn-borderless btn-edit" (click)="editValid = true">
                             <fa-icon [icon]="faEdit" size="lg"></fa-icon>
                         </button>
@@ -126,6 +126,7 @@
                             (click)="openModalDeleteLesson(templateDeleteLesson, i)">
                             <fa-icon [icon]="faTrashAlt" size="lg"></fa-icon>
                         </button>
+                        <br>
                     </div>
                     <br>
                     <div>
