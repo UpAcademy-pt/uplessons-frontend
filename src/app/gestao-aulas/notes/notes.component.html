@@ -58,7 +58,7 @@
     <div *ngFor="let note of notes$ | async; let i = index;" id="{{i}}">
       <accordion [isAnimated]="true">
         <accordion-group heading="Nota {{i+1}} - {{note.title}}" [panelClass]="accordionClass">
-          <div>
+          <div style="float: right;">
             <button type="button" class="btn-borderless btn-edit" (click)="editValid = true">
               <fa-icon [icon]="faEdit" size="lg"></fa-icon>
             </button>
@@ -74,11 +74,9 @@
               <div *ngIf="editValid; else elseBlock">
                 <form class="mg-5 mt-3 container" #newNoteForm="ngForm" (ngSubmit)="updateNote(note)">
                   <textarea class="form-control" id="exampleFormControlTextareaTitle" rows="1" [(ngModel)]="note.title"
-                    name="title">  {{note.title}}
-                </textarea>
+                    name="title"> {{note.title}}</textarea>
                   <textarea class="form-control" id="formControlTextareaDescription" rows="3"
-                    [(ngModel)]="note.description" name="description">  {{note.description}}
-                  </textarea>
+                    [(ngModel)]="note.description" name="description"> {{note.description}}</textarea>
                   <br>
                   <button type="button" class="btn btn-secondary validar" (click)="editValid = false; updateNote(note)">Salvar
                     Nota</button>&nbsp;
@@ -86,8 +84,7 @@
                 </form>
               </div>
               <ng-template #elseBlock>
-                <textarea class="form-control" id="formControlTextareaDescription" rows="3" disabled>  {{note.description}}
-                </textarea>
+                <textarea class="form-control" id="formControlTextareaDescription" rows="3" disabled> {{note.description}}</textarea>
               </ng-template>
             </div>
           </div>
