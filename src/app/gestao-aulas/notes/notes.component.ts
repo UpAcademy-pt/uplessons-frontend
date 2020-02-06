@@ -11,8 +11,9 @@ import { NotesService } from '../shared/services/notes.service';
 import { faEdit, faTrashAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import html2canvas from 'html2canvas';
 import { ScriptPdfService } from '../shared/services/scriptPdf/script-pdf.service';
+import { content } from 'html2canvas/dist/types/css/property-descriptors/content';
 
-declare let pdfMake: any;
+declare var pdfMake: any;
 
 
 @Component({
@@ -35,6 +36,7 @@ export class NotesComponent implements OnInit {
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   faUserPlus = faUserPlus;
+  public cont: string[];
 
   private title: string;
   private description: string;
@@ -120,7 +122,9 @@ export class NotesComponent implements OnInit {
     // this.noteToUpdate = new Note();
   }
 
-  generatePdf() {
+  async generatePdf() {
+    console.log(this.notes);
+    
     // const opt = { letterRendering: 1, allowTaint: true, imageTimeout: 10000, onrendered: (canvas) => { } };
     // html2canvas(document.querySelector('#capture'), opt).then(canvas => {
     //   const img = canvas.toDataURL();
@@ -153,34 +157,44 @@ export class NotesComponent implements OnInit {
       //   ]
       // };
      var documentDefinition = {
-  content: [
-    'Bulleted list example:',
-    {
-      // to treat a paragraph as a bulleted list, set an array of items under the ul key
-      ul: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        { text: 'Item 4', bold: true },
-      ]
-    },
+      // header: { image: await this.getBase64ImageFromURL(
+      //   "http://www.upacademy.pt/media/UP-Academy-Logo-Retina-Website.png"
+      // ) },
 
-    'Numbered list example:',
-    {
-      // for numbered lists set the ol key
-      ol: [
-        'Item 1',
-        'Item 2',
-        'Item 3'
-      ]
-    }
-  ]
-};
+      content: this.dataService.notes.map(function(element) {
+     return {text: 'Nota -' + element.title + '\n\n' + element.description + '\n\n'}
+   })
+  };
 
       pdfMake.createPdf(documentDefinition).open();
    // });
   }
 
+  // getBase64ImageFromURL(url) {
+  //   return new Promise((resolve, reject) => {
+  //     var img = new Image();
+  //     img.setAttribute("crossOrigin", "anonymous");
+
+  //     img.onload = () => {
+  //       var canvas = document.createElement("canvas");
+  //       canvas.width = img.width;
+  //       canvas.height = img.height;
+
+  //       var ctx = canvas.getContext("2d");
+  //       ctx.drawImage(img, 0, 0);
+
+  //       var dataURL = canvas.toDataURL("image/png");
+
+  //       resolve(dataURL);
+  //     };
+
+  //     img.onerror = error => {
+  //       reject(error);
+  //     };
+
+  //     img.src = url;
+  //   });
+  // }
 
 }
 
