@@ -17,7 +17,7 @@
 }
 
 .table-responsive {
-    max-height: 350px;
+    max-height: 490px;
     overflow-y: scroll;
 }
 table {
@@ -46,4 +46,9 @@ table {
     background-color: rgb(222, 137, 57);
     border-color: rgb(222, 137, 57);
 
+}
+
+.table-head {
+    background-color: #6161610f;
+    color: rgb(222, 137, 57);
 }

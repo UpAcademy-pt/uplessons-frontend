@@ -11,16 +11,10 @@
 
   .maincontent {
     flex-grow: 1;
-
-    min-height: 2em;
-    height: 100%;
-
+    overflow: auto;
   }
 
   app-footer {
     flex-shrink: 0;
   }
-
 }
-
-

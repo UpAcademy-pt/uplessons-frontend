@@ -61,8 +61,9 @@
                                 <p><b>Respostas:</b></p>
                                 <hr>
 
-                                <div *ngFor="let answer of answers$ | async ">
-                                    {{answer.answer}}
+                                <div *ngFor="let answer of answerDisplay">
+                                    <span class="font-weight-bold">{{getRandomUser()}} : </span>
+                                    {{answer}}
                                     <hr>
                                 </div>
                             </div>

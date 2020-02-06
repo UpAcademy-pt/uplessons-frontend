@@ -57,7 +57,7 @@
                         <!-- [formGroup]="form" -->
                         <div class="table-responsive">
                             <table class="table" [ngClass]='theme'>
-                                <thead>
+                                <thead class="table-head">
                                     <tr>
                                         <th>
                                             TÍTULO
@@ -141,12 +141,10 @@
                                 <div *ngIf="editValid; else elseBlock">
                                     <form class="mg-5 mt-3 container" #newNoteForm="ngForm"
                                         (ngSubmit)="updateLesson(lesson)">
-                                        <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}"
-                                            rows="1" [(ngModel)]="lesson.title" name="title">  {{lesson.title}}
-                                        </textarea>
+                                        <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}" rows="1"
+                                            [(ngModel)]="lesson.title" name="title"> {{lesson.title}}</textarea>
                                         <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
-                                            [(ngModel)]="lesson.description" name="description">  {{lesson.description}}
-                                        </textarea>
+                                            [(ngModel)]="lesson.description" name="description"> {{lesson.description}}</textarea>
                                         <br>
                                         <div>
                                             <h4 class="modal-title pull-left">Adicionar Materiais:</h4>
@@ -155,7 +153,7 @@
                                             <!-- [formGroup]="form" -->
                                             <div class="table-responsive">
                                                 <table class="table" [ngClass]='theme'>
-                                                    <thead>
+                                                    <thead class="table-head">
                                                         <tr>
                                                             <th>
                                                                 TÍTULO
@@ -216,18 +214,15 @@
                                 </div>
                                 <ng-template #elseBlock>
                                     <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
-                                        disabled>
-                                        {{lesson.description}}
-                                </textarea>
-                                    <hr>
-                                    <p><b>Materiais:</b></p>
-                                    <div *ngIf="showMats">
-                                        <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
-                                        <a *ngFor="let material of (materialsDisplay$ | async)[i]"
-                                            class="btn btn-secondary validar" href="{{material.url}}" role="button"
-                                            target="_blank" popover="{{material.url}}" triggers="mouseenter:mouseleave"
-                                            style="margin-right: 10px;">{{material.title}}</a>
-                                    </div>
+                                        disabled> {{lesson.description}}</textarea>
+                                <hr>
+                                <p><b>Materiais:</b></p>
+                        <div *ngIf="showMats">
+                            <!-- <label for="{{material.url}}"*ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-primary" role="button" target="_blank">{{material.title}}</label> -->
+                            <a *ngFor="let material of (materialsDisplay$ | async)[i]" class="btn btn-secondary validar"
+                                href="{{material.url}}" role="button" target="_blank" popover="{{material.url}}"
+                                triggers="mouseenter:mouseleave" style="margin-right: 10px;">{{material.title}}</a>
+                        </div>
                                 </ng-template>
                             </div>
                         </div>

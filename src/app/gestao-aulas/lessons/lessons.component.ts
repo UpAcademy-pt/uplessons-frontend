@@ -207,7 +207,7 @@ export class LessonsComponent implements OnInit {
   // ADICIONAR MATERIAIS
   // ------------
 
-  public getLessonsMaterials(lesson: Lesson,i :number){
+  public getLessonsMaterials(lesson: Lesson, i: number) {
     this.materialsApi.getMaterialsById(lesson.id).subscribe(
       (data: any) => {
         this.matsDisplay.splice(i, 1, data);
