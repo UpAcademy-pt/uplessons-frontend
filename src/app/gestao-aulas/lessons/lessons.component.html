@@ -137,11 +137,9 @@
                                     <form class="mg-5 mt-3 container" #newNoteForm="ngForm"
                                         (ngSubmit)="updateLesson(lesson)">
                                         <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}" rows="1"
-                                            [(ngModel)]="lesson.title" name="title">  {{lesson.title}}
-                                        </textarea>
+                                            [(ngModel)]="lesson.title" name="title"> {{lesson.title}}</textarea>
                                         <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
-                                            [(ngModel)]="lesson.description" name="description">  {{lesson.description}}
-                                        </textarea>
+                                            [(ngModel)]="lesson.description" name="description"> {{lesson.description}}</textarea>
                                         <br>
                                         <div>
                                             <h4 class="modal-title pull-left">Adicionar Materiais:</h4>
@@ -208,9 +206,7 @@
                                 </div>
                                 <ng-template #elseBlock>
                                     <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
-                                        disabled>
-                                        {{lesson.description}}
-                                </textarea>
+                                        disabled> {{lesson.description}}</textarea>
                                 <hr>
                                 <p><b>Materiais:</b></p>
                         <div *ngIf="showMats">
