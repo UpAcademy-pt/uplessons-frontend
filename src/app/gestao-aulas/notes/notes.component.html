@@ -5,7 +5,11 @@
 
   <div *ngIf="!newNote; else alternativeBlock " style="float: right">
     <div class="container" style="text-align: right; padding-right: 15px; ">
-      <button type="button" class="btn btn-secondary validar btn-lg" (click)="newNote = true">+</button>
+      <button type="button" class="btn btn-secondary validar btn-lg verticalB" (click)="newNote = true">+</button>
+      <a (click)="generatePdf()" target="_blank" type="button" class="btn-borderless btn-pop ml-3"
+        popover="Exportar para PDF" triggers="mouseenter:mouseleave">
+        <fa-icon [icon]="faFilePdf" size="3x" class="btn-export"></fa-icon>
+      </a>
     </div>
   </div>
   <ng-template #alternativeBlock>
@@ -56,11 +60,11 @@
 
   <!-- <div class="container" style="text-align: right; padding-right: 15px;">
   <button type="button" class="btn btn-secondary" (click)="openModalNewNote(templateNewNote)">Criar nova nota</button>
-</div> -->
+</div> <i class="far fa-file-pdf"></i>-->
   <br>
   <br>
   <br>
-  <button (click)="generatePdf()">Open PDF</button>
+
   <div class="container">
     <div>
       <div *ngFor="let note of notes$ | async; let i = index;" id="{{i}}">
@@ -88,12 +92,13 @@
                     <br>
                     <button type="button" class="btn btn-secondary validar"
                       (click)="editValid = false; updateNote(note)">Salvar
-                      </button>&nbsp;
+                    </button>&nbsp;
                     <button type="button" class="btn btn-secondary" (click)="editValid = false">Cancelar</button>
                   </form>
                 </div>
                 <ng-template #elseBlock>
-                  <textarea class="form-control" id="formControlTextareaDescription" rows="3" disabled> {{note.description}}</textarea>
+                  <textarea class="form-control" id="formControlTextareaDescription" rows="3"
+                    disabled> {{note.description}}</textarea>
                 </ng-template>
               </div>
             </div>
@@ -157,14 +162,13 @@
     </div>
   </ng-template>
 
-<!-- Modal Remover Nota -->
-<ng-template #templateDeleteNote>
-  <div class="modal-body text-center">
-    <p>Tem a certeza que deseja remover o apontamento?</p>
-    <button type="button" class="btn btn-secondary btn-lg" (click)="modalRef.hide()"
-      style="margin-right: 5px">Não</button>
-    <button type="button" class="btn btn-danger" (click)="deleteNoteById()" style="margin-left: 5px">Sim</button>
-  </div>
-</ng-template>
+  <!-- Modal Remover Nota -->
+  <ng-template #templateDeleteNote>
+    <div class="modal-body text-center">
+      <p>Tem a certeza que deseja remover o apontamento?</p>
+      <button type="button" class="btn btn-secondary btn-lg" (click)="modalRef.hide()"
+        style="margin-right: 5px">Não</button>
+      <button type="button" class="btn btn-danger" (click)="deleteNoteById()" style="margin-left: 5px">Sim</button>
+    </div>
+  </ng-template>
 </div>
-

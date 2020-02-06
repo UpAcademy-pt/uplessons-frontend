@@ -8,7 +8,7 @@ import { ServiceGeneralService } from '../shared/services/service-general.servic
 import { ReplaySubject } from 'rxjs';
 import { DataService } from '../shared/services/data.service';
 import { NotesService } from '../shared/services/notes.service';
-import { faEdit, faTrashAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrashAlt, faUserPlus, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import html2canvas from 'html2canvas';
 import { ScriptPdfService } from '../shared/services/scriptPdf/script-pdf.service';
 import { content } from 'html2canvas/dist/types/css/property-descriptors/content';
@@ -36,6 +36,7 @@ export class NotesComponent implements OnInit {
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   faUserPlus = faUserPlus;
+  faFilePdf = faFilePdf;
   public cont: string[];
 
   private title: string;
