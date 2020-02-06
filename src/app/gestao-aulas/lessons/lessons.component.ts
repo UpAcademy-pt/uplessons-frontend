@@ -1,7 +1,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserServiceService } from 'src/app/core/services/user-service/user-service.service';
 import { ServiceGeneralService } from '../shared/services/service-general.service';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 import { Edition } from '../shared/models/edition/edition';
 import { Route } from '@angular/compiler/src/core';
 import { MaterialsService } from '../shared/services/materials.service';
@@ -13,6 +13,7 @@ import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-lessons',
@@ -40,6 +41,8 @@ export class LessonsComponent implements OnInit {
   editMatValid: boolean = false;
   checkedValue: boolean = false;
   public newLesson: boolean = false;
+  public materialsdisplaytoAdd$: Observable<any[]>;
+  
 
   public title: string;
   public description: string;
@@ -54,6 +57,7 @@ export class LessonsComponent implements OnInit {
 
   form: FormGroup;
   checkArray: FormArray;
+  filterValue: string;
 
 
 
@@ -113,6 +117,7 @@ export class LessonsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.displayData();
   }
 
   // ------------
@@ -136,6 +141,7 @@ export class LessonsComponent implements OnInit {
         this.lesson = new Lesson();
       }
     )
+    this.idMatAdded = new Array();
     this.checkArray.clear();
   }
 
@@ -295,8 +301,21 @@ export class LessonsComponent implements OnInit {
     }
     return found;
   }
+  public searchFilter() {
+    if (this.filterValue === '') {
+      return this.materials$;
+    } else {
+      const re = new RegExp(this.filterValue, 'gi');
+      return this.materials$
+        .pipe(
+          map((items: Materials[]) => items.filter(item => item.title.match(re)))
+        );
+    }
+  }
 
-
+  public displayData() {
+    this.materialsdisplaytoAdd$ = this.searchFilter();
+}
 
 
 

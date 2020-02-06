@@ -21,7 +21,7 @@
     <div *ngIf="isSuperUser">      
         <div *ngIf="newLesson">
             <h4 class="text-center"><b>Criar nova aula:</b></h4>
-            <form class="mg-5 mt-3 container">
+            <div class="mg-5 mt-3 container">
                 <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Título:</label>
                     <div class="col-sm-10">
@@ -52,6 +52,11 @@
                 <div *ngIf="addMaterial" class="form-group row">
                     <div>
                         <h4 class="modal-title pull-left">Adicionar Materiais:</h4>
+
+                    </div>
+                    <div class="input-group mb-3 col-12 col-sm-3 pl-0">
+                        <input type="text" class="form-control" [(ngModel)]="filterValue" (keyup)="displayData()"
+                            placeholder="Search...">
                     </div>
                     <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm">
                         <!-- [formGroup]="form" -->
@@ -74,7 +79,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let material of materials$ | async ; let i = index;" id="{{i}}">
+                                    <tr *ngFor="let material of materialsdisplaytoAdd$ | async ; let i = index;"
+                                        id="{{i}}">
                                         <td>
                                             {{material.title}}
                                         </td>
@@ -109,7 +115,7 @@
                         class= "btn btn-secondary validar mx-auto">Criar
                         aula</button>
                 </div>
-            </form>
+            </div>
             <hr>
         </div>
     </div>
@@ -122,8 +128,8 @@
     <div class="container">
         <accordion [isAnimated]="true">
             <div *ngFor="let lesson of lessons$ | async; let i = index;">
-                <accordion-group (click)="getLessonsMaterials(lesson, i); lessonRow(lesson)" heading="Aula {{i+1}} - {{lesson.title}}"
-                    id="{{i}}" panelClass="customClass">
+                <accordion-group (click)="getLessonsMaterials(lesson, i); lessonRow(lesson)"
+                    heading="Aula {{i+1}} - {{lesson.title}}" id="{{i}}" panelClass="customClass">
                     <div *ngIf="isSuperUser" style="float: right;">
                         <button type="button" class="btn-borderless btn-edit" (click)="editValid = true">
                             <fa-icon [icon]="faEdit" size="lg"></fa-icon>
@@ -139,7 +145,7 @@
                         <div>
                             <div class="form-group">
                                 <div *ngIf="editValid; else elseBlock">
-                                    <form class="mg-5 mt-3 container" #newNoteForm="ngForm"
+                                    <div class="mg-5 mt-3 container"
                                         (ngSubmit)="updateLesson(lesson)">
                                         <textarea class="form-control" id="exampleFormControlTextareaTitle{{i}}" rows="1"
                                             [(ngModel)]="lesson.title" name="title"> {{lesson.title}}</textarea>
@@ -148,6 +154,10 @@
                                         <br>
                                         <div>
                                             <h4 class="modal-title pull-left">Adicionar Materiais:</h4>
+                                        </div>
+                                        <div class="input-group mb-3 col-12 col-sm-3 pl-0">
+                                            <input type="text" class="form-control" [(ngModel)]="filterValue" (keyup)="displayData()"
+                                                placeholder="Search...">
                                         </div>
                                         <form class="mg-5 mt-3 container" #addMaterialsForm="ngForm">
                                             <!-- [formGroup]="form" -->
@@ -170,7 +180,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr *ngFor="let material of materials$ | async ; let i = index;"
+                                                        <tr *ngFor="let material of materialsdisplaytoAdd$ | async ; let i = index;"
                                                             id="{{i}}">
                                                             <td>
                                                                 {{material.title}}
@@ -210,7 +220,7 @@
                                                 (click)="editValid = false; updateLessons$()">Cancelar</button>
 
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                                 <ng-template #elseBlock>
                                     <textarea class="form-control" id="formControlTextareaDescription{{i}}" rows="3"
