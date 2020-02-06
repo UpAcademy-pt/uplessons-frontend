@@ -47,9 +47,14 @@
 ::ng-deep .card.customClass,
 .card.customClass .card-header,
 .panel.customClass {
-  background-color: #343a40c9;
+  background-color: #6161610f;
   color: rgb(0, 0, 0);
 }
 ::ng-deep .panel.customClass .panel-body {
   background-color: #ffffff;
+}
+
+.table-head {
+  background-color: #6161610f;
+  color: rgb(222, 137, 57);
 }
