@@ -17,20 +17,20 @@
     <br>
 
     <div *ngIf="newQuestion">
-        <h4 class="text-center"><b>Criar nova pergunta:</b></h4>
+        <h4 class="text-center"><b>Criar novo tópico:</b></h4>
         <form class="mg-5 mt-3 container" (ngSubmit)="createQuestion()">
             <div class="form-group row">
-                <label for="title" class="col-sm-2 col-form-label">Titulo:</label>
+                <label for="title" class="col-sm-2 col-form-label">Título:</label>
                 <div class="col-sm-10">
                     <input [(ngModel)]="title" name="title" id="title" type="text" class="form-control"
-                        placeholder="Insira o titulo da pergunta">
+                        placeholder="Insira o titulo">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="type" class="col-sm-2 col-form-label">Descriçao:</label>
+                <label for="type" class="col-sm-2 col-form-label">Descrição:</label>
                 <div class="col-sm-10">
                     <textarea [(ngModel)]="description" name="description" id="description" type="text"
-                        class="form-control" placeholder="Insira a descriçao da pergunta" rows="5"></textarea>
+                        class="form-control" placeholder="Insira a descrição" rows="5"></textarea>
                 </div>
             </div>
             <div class="row">
@@ -40,16 +40,15 @@
     </div>
     <br>
 
-    <h4 class="text-center"><b>Perguntas existentes:</b></h4>
-
+   <br>
     <div *ngIf="questions$ ==null">
-        <p>Atualmente nao existem perguntas</p>
+        <p>Atualmente nao existem tópicos</p>
     </div>
     <div class="container">
         <div>
             <accordion [isAnimated]="true">
                 <div *ngFor="let question of questions$ | async; let i = index; ">
-                    <accordion-group heading="Pergunta {{i+1}} - {{question.title}}" id="{{i}}"
+                    <accordion-group heading="Tópico {{i+1}} - {{question.title}}" id="{{i}}"
                         (click)="getAnswersByQuestionId(question.id, i)">
                         <div>
                             <p>{{question.description}}</p>

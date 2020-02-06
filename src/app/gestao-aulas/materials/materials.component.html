@@ -18,20 +18,20 @@
       <h4 class="text-center"><b>Criar novo material:</b></h4>
     <form class="mg-5 mt-3 container" #updateMaterial="ngForm" (ngSubmit)="createMaterial()">
         <div class="form-group row">
-          <label for="title" class="col-sm-1 col-form-label">Título:</label>
-          <div class="col-sm-3">
+          <label for="title" class="col-sm-1 col-xs-2 col-form-label">Título:</label>
+          <div class="col-sm-3 col-xs-4">
             <input [(ngModel)]="title" name="title" id="title"
-              type="text" class="form-control" placeholder="Título ate 10 caracteres" required maxlength="10">
+              type="text" class="form-control" placeholder="Máx. 10 caracteres" required maxlength="10">
              <!--  <small class="text-danger" [hidden]="title.valid || !title.touched">Digite a titulo no
                 maximo de 10 caracteres!</small> -->
           </div>
-          <label for="type" class="col-sm-1 col-form-label">Tecnologia:</label>
-          <div class="col-sm-3">
+          <label for="type" class="col-sm-1 col-xs-2 col-form-label">Tecnologia:</label>
+          <div class="col-sm-3 col-xs-4" >
             <input [(ngModel)]="type" name="type" id="type"
             type="text" class="form-control" placeholder="Coloque o tipo do material" required>
           </div>
-          <label for="link" class="col-sm-1 col-form-label">Link:</label>
-          <div class="col-sm-3">
+          <label for="link" class="col-sm-1 col-xs-2 col-form-label">Link:</label>
+          <div class="col-sm-3 col-xs-4">
             <input [(ngModel)]="link" name="link" id="link"
             type="text" class="form-control" placeholder="Coloque o link" required>
           </div>
@@ -48,7 +48,7 @@
 
       <div class="input-group mb-3 col-12 col-sm-3 pl-0">
         <input type="text" class="form-control" [(ngModel)]="filterValue" (keyup)="displayData()"
-          placeholder="Search...">
+          placeholder="Pesquisar...">
       </div>
       <div class="table-responsive">
         <table class="table" [ngClass]='theme'>

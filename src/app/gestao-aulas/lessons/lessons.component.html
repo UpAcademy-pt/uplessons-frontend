@@ -23,17 +23,17 @@
             <h4 class="text-center"><b>Criar nova aula:</b></h4>
             <form class="mg-5 mt-3 container">
                 <div class="form-group row">
-                    <label for="title" class="col-sm-2 col-form-label">Titulo:</label>
+                    <label for="title" class="col-sm-2 col-form-label">Título:</label>
                     <div class="col-sm-10">
                         <input [(ngModel)]="title" name="title" id="title" type="text" class="form-control"
-                            placeholder="Insira o titulo da aula">
+                            placeholder="Insira o título da aula">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="type" class="col-sm-2 col-form-label">Descriçao:</label>
+                    <label for="type" class="col-sm-2 col-form-label">Descrição:</label>
                     <div class="col-sm-10">
                         <textarea [(ngModel)]="description" name="description" id="description" type="text"
-                            class="form-control" placeholder="Insira a descriçao da aula" rows="3"></textarea>
+                            class="form-control" placeholder="Insira a descrição da aula" rows="3"></textarea>
                     </div>
                 </div>
                 <div *ngIf="!addMaterial; else alternativeBlock">
@@ -81,7 +81,7 @@
                                         <td>
                                             {{material.type}}
                                         </td>
-                                        <td>
+                                        <td class = "linhaURL">
                                             {{material.url}}
                                         </td>
                                         <td class="text-center">
@@ -180,7 +180,7 @@
                                                             <td>
                                                                 {{material.type}}
                                                             </td>
-                                                            <td>
+                                                            <td class = "linhaURL">
                                                                 {{material.url}}
                                                             </td>
                                                             <td class="text-center">
